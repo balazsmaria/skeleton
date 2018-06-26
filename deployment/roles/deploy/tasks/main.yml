@@ -1,0 +1,25 @@
+- name: Create skeleton directory
+  file: path=/opt/skeleton state=directory
+
+- name: Download skeleton runnable jar
+  get_url:
+    url: http://nexus.company.com/artifact/maven/content?g=com.company.skeleton&a=backend&v=0.0.1-SNAPSHOT&r=snapshots
+    dest: /opt/skeleton/skeleton.jar
+    backup: yes
+    force: yes
+
+- name: Ensure app is configured
+  template:
+    src: application.properties.j2
+    dest: /opt/skeleton/application.properties
+
+- name: Ensure logging is configured
+  template:
+    src: logback-spring.xml.j2
+    dest: /opt/skeleton/logback-spring.xml
+
+- name: Install skeleton systemd unit file
+  template: src=skeleton.service.j2 dest=/etc/systemd/system/skeleton.service
+
+- name: Start skeleton
+  systemd: state=restarted name=skeleton daemon_reload=yes

@@ -1,0 +1,16 @@
+- name: Set up multiple authorized keys
+  authorized_key:
+    user: clouduser
+    state: present
+    key: '{{ item }}'
+  with_file:
+    - public_keys/some-user.pub
+
+- name: Ensure kernel is at the latest version
+  yum: name=kernel state=latest
+
+- name: Install latest Java 8
+  yum: name=java-1.8.0-openjdk.x86_64 state=latest
+
+- name: Install Netcat
+  yum: name=nmap-ncat state=latest

@@ -1,0 +1,9 @@
+---
+- hosts: cloud
+  remote_user: clouduser
+  roles:
+     - common
+     - deploy
+
+  vars:
+    - skeleton_port: 80
