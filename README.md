@@ -13,3 +13,7 @@ Modules
 * deployment
 
   the `ansible` deployment scripts
+* Jenkinsfile
+  
+  description of the CI/CD pipeline
+  
