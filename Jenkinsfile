@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'RHEL7' }
+    agent { label 'master' }
     tools {
         maven 'Maven 3.3.9'
         jdk 'jdk1.8.0'
