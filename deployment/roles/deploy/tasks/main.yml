@@ -1,12 +1,15 @@
 - name: Create skeleton directory
   file: path=/opt/skeleton state=directory
 
-- name: Download skeleton runnable jar
-  get_url:
-    url: http://nexus.company.com/artifact/maven/content?g=com.company.skeleton&a=backend&v=0.0.1-SNAPSHOT&r=snapshots
-    dest: /opt/skeleton/skeleton.jar
-    backup: yes
-    force: yes
+- name: Download JAR File to the skeleton directory
+  maven_artifact:
+    group_id: "{{ group_id }}"
+    artifact_id: "{{ artifact_id }}"
+    extension: jar
+    version: "{{ artifact_version }}""
+    repository_url: "{{ repository_url }}"
+    dest: /opt/skeleton/
+    mode: 0755
 
 - name: Ensure app is configured
   template:
